@@ -16,18 +16,20 @@ public class Main {
         a1.setOwner(p1);
 
         Person p2 = new Person();
-        p2.setName("도현정");
+        p2.setName("홍길동");
         p2.setAge(24);
         p2.setCashAmount(100000);
 
         BankAccount a2 = new BankAccount();
+        p2.setBankAccount(a2);
         a2.setBalance(500000);
         a2.setOwner(p2);
 
 
-        a2.deposit(30000);
-        a2.withdraw(170000);
-        a2.deposit(620000);
-        a2.withdraw(890000);
+        a2.transfer(a1, 200000);
+        a1.transfer(p2, 150000);
+        p1.transfer(p2, 130000);
+        p2.transfer(a1, 270000);
+
     }
 }
