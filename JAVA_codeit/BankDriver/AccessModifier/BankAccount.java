@@ -60,10 +60,25 @@ public class BankAccount {
         }
     }
 
-    // 첫 번째 파라미터 : 받는 사람(Person)
-    // 두 번째 파라미터 : 이체할 금액(정수)
-    // 리턴 : 성공여부(불린)
-    // boolean transfer(Person to, int amount) {
-    // (다음 과제에서 사용하므로, 우선 skip합니다.)
-    // }
+    public boolean transfer(Person to, int amount) {
+        // insert code here
+        return transfer(to.getBankAccount(), amount);
+    }
+
+    // 첫 번째 파라미터: 받는 사람의 계정 (BankAccount)
+    // 두 번째 파라미터: 이체할 금액 (정수)
+    // 리턴 : 성공여부 (불린)
+    public boolean transfer(BankAccount to, int amount) {
+        // insert code here
+        boolean success = false;
+        if(amount>balance || amount<0) {
+            success = false;
+        }else {
+            balance = balance - amount;
+            to.setBalance(to.getBalance() + amount);
+            success = true;
+        }
+        System.out.println(""+ success +" - from: "+owner.getName() +", to: " + to.owner.getName() + ", amount: " +amount+ ", balance: "+balance);
+        return success;
+    }
 }
