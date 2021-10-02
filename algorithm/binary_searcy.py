@@ -1,6 +1,6 @@
 
 def binary_search(element, some_list, start_index=0, end_index=None):
-    # end_index가 따로 주어지지 않은 경우에는 리스트의 마지막 인덱스
+    # end_index가 따로 주어지지 않은 경우에는 리스트의 마지막 인덱스로
     if end_index == None:
         end_index = len(some_list) - 1
 
