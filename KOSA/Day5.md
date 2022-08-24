@@ -134,3 +134,48 @@ public class Ex09_Operation_quiz{
 	}
 ```
   
+  #### 별찍기 과제
+  ```java
+  
+public class Ex12_Statement_Quiz3 {
+
+	public static void main(String[] args) {
+		// 별찍기
+		for(int i=0;i<=5;i++) {
+			for(int j=0;j<=i;j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+		
+		
+		int repeated = 0;
+		int j = 5;
+		int k = 0;
+		for(int i=0;i<5;i++){
+			while(j-1>0) {
+				System.out.print(" ");
+				j--;
+			}
+			while(k<=i) {
+				System.out.print("*");
+				k++;
+			}
+			k =0;
+			j = 5 - (i+1);
+			System.out.println();
+			
+		}
+		
+
+		for(int i=5;i>=0;i--) {
+			for(int m=0;m<=i;m++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+		
+	}
+
+}
+```
