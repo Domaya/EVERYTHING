@@ -131,3 +131,49 @@ class InitTest{
 	
 }
 ```
+
+#### static method
+```java
+
+	//static member field : 객체간 공유자원...
+	//static method 
+	//1.객체 생성 없이 호출이 가능하다.
+	//2.많이 사용한다
+	//3.설계도를 만들 때
+	//4.자원을 많이 쓰니 편하게 쓰도록 미리 할당
+
+
+class StaticClass{
+	int iv;
+	static int cv;
+	void m() {
+		//일반 함수에서 iv 제어 가능
+		//일반 함수가 static 변수를 바꿀 수 있다.
+		cv = 100;
+		//why? static 자원은 객체 셍성 이전에 메모리에 로드되므로...사용할 수 있음
+	}
+	static void print() {
+		//static 함수
+		//1.cv를 가지고 놀 수 있다
+		//2.일반변수 iv를 제어할 수 없다...
+		//Cannot make a static reference to the non-static field iv
+		//iv = 19;
+		cv = 1024125;
+	}
+}
+
+public class Ex10_Static_Method {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		StaticClass.print();
+		System.out.println(StaticClass.cv);
+		
+		//일반자원(객체 생성)
+		StaticClass sc = new StaticClass();
+		sc.m();
+		sc.print();
+	}
+
+}
+```
