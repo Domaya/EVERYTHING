@@ -171,3 +171,90 @@ public class Ex03_Array_Lotto {
 
 }
 ```
+### 개선된 for문  
+파이썬이랑 비슷한 듯
+```java
+	int[] arr = {5, 6, 7, 8, 9};
+	for(int i=0; i<arr.length; i++) {
+		System.out.println(arr[i]);
+	}
+	// 개선된 for문
+	for(int value : arr) {
+		System.out.println(value);
+	}
+		
+	String[] strarr = {"A", "B", "C", "D", "FFF"};
+	for(String value : strarr) {
+		System.out.println(value);
+	}
+```
+
+
+### 객체 배열
+참조타입(클래스 등)배열은 각 항목에 객체의 번지를 가지고 있다.
+
+#### 객체 배열을 만드는 법
+```java
+	//1. int[] arr = new int[10
+	Person[] parray = new Person[10];
+	for(int i=0; i<parray.length; i++) {
+		parray[i] = new Person();
+		System.out.println("주소값 : "+ parray[i]);
+	}
+	//2. int[] arr = new int []{10, 20, 30}
+	Person[] parray2 = new Person[] {new Person(), new Person(), new Person()};
+		
+	//3.int[] arr = {10, 20, 30}
+	Person[] parray3 = {new Person(),new Person(), new Person()};
+```
+
+
+### 다차원 배열(2차원)  
+[행][열]
+영화관 좌석, 지도 좌표값, 오목, 엑셀
+예) 영화관 예매 취소 ... 관리 프로그램
+
+```java
+
+public class Ex08_Array_Rank {
+	
+	public static void main(String[] args) {
+		/*
+		 다차원 배열(2차원)
+		 [행][열]
+		 영화관 좌석, 지도 좌표값, 오목, 엑셀
+		 
+		 영화관 예매 취소 ... 관리 프로그램
+		 
+		 */
+		int[][] score = new int[3][2];
+		score[0][0] = 100;
+		score[0][1] =  200;
+		
+		score[1][0] = 300;
+		score[1][1] = 400;
+		
+		score[2][0] = 500;
+		score[2][1] = 600;
+		
+		//for문 (중첩 for)
+		//행의 개수 : 배열이름.length
+		//열의 개수 : 배열이름[i].length >> 열의 개수
+		
+		for(int i=0; i<score.length; i++) {
+			for(int j=0; j< score[i].length; j++) {
+				System.out.printf("score[%d][%d] = %d\t", i, j, score[i][j]);
+			}
+			System.out.println();
+		}
+		//개선된 for문
+		for(int[] i : score){
+			for(int j : i) {
+				System.out.println(j);
+			}
+		}
+		
+	}
+}
+```
+
