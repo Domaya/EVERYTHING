@@ -194,3 +194,60 @@ class Buyer2{
 	
 }
 ```
+# 싱글톤(디자인 패턴)
+### Singleton.java
+```java
+package kr.or.kosa;
+//디자인 패턴(생성 패턴) >> new
+
+//싱글톤...(객체 하나를 만들어 공유)
+//의도 : 하나의 객체를 공유하는 보장성 코드 제공
+
+//공유IP
+//공유프린터
+//설계할 때 ...
+
+
+public class Singleton {
+	private static Singleton p; //p라는 변수가 주소를 가져야 한다....이러려면 new를 해야되는데...
+	private Singleton() {
+		//생성자에서 접근자를 private로 쓰면 생성자 함수를 호출하지 못한다... new 불가
+		
+	}
+	public static Singleton getInstance() {
+		if(p == null) {
+			p = new Singleton(); //같은 클래스 내부에서는 public과 private은 의미가 없다
+		}
+		return p;
+	}
+}
+/*
+ * Singleton s = new Singleton(); <이거 못하게 막는 방법이 있을까?
+ */
+```
+
+### Ex14_Singleton_main.java
+```java
+import kr.or.kosa.Singleton;
+
+public class Ex14_Singleton_main {
+	public static void main(String[] args) {
+//		Singleton singleton = new Singleton(); //생성자의 접근자가 private이라 할 수 없음
+		Singleton s = Singleton.getInstance();
+		System.out.println(s);//kr.or.kosa.Singleton@6f2b958e
+		Singleton s2 = Singleton.getInstance();
+		System.out.println(s2);//kr.or.kosa.Singleton@6f2b958e
+		Singleton s3 = Singleton.getInstance();
+		System.out.println(s3);//kr.or.kosa.Singleton@6f2b958e
+	}
+}
+```
+
+# 추상 클래스
+미완성 클래스(설계도)
+1. 완성된 코드 + 미완성 코드  
+2. 완성? 함수...실행 블록이 있는 함수 + 미완성(함수) 실행블록이 없는 함수
+3. 완성된 클래스(new 가능) - 미완성클래스(스스로 객체 생성 불가)  
+
+설계자 입장에서 왜 추상클래스를 만드는 걸까?
+->재정의를 강제하기 위해서.... 강제적 구현을 목적으로 (믿지 못하니까)
