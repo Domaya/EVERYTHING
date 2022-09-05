@@ -242,7 +242,6 @@ public class Ex14_Singleton_main {
 	}
 }
 ```
-
 # 추상 클래스
 미완성 클래스(설계도)
 1. 완성된 코드 + 미완성 코드  
