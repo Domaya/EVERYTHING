@@ -176,11 +176,249 @@ public static void main(String[] args) {
 	}
 ```
 
+```java
+import java.util.ArrayList;
+
+import kr.or.kosa.Emp;
+
+public class Ex03_ArrayList_Object {
+
+	public static void main(String[] args) {
+		//1. 사원 1명을 만드세요
+		Emp emp = new Emp(1000, "김유신", "장군");
+		System.out.println(emp.toString());
+		
+		//2. 사원 2명을 만드세요
+		Emp[] emplist = {new Emp(100, "전우치", "도사"), new Emp(200, "박씨부인", "주술사")};
+		for(Emp e : emplist) {
+			System.out.println(e.toString());
+		}
+		
+		//3. 사원이 1명 더 입사했음. (300, "이씨", "IT")
+		//이러면 3개짜리 배열을 생성해서 다 옮겨야 함...
+		//그래서 우리는 ArrayList를 쓸 것임
+		
+		ArrayList elist = new ArrayList();
+		elist.add(emplist[0]);
+		elist.add(emplist[1]);
+		elist.add(new Emp(300, "이씨", "IT"));
+		
+		for(int i=0; i<elist.size();i++) {
+			System.out.println(elist.get(i).toString());
+			//Emp e = (Emp)elist.get(i);//다운캐스팅
+			//e.toString();
+		}
+		System.out.println(elist.toString());
+		
+		elist.add(new Emp(400, "최씨", "관리"));
+		System.out.println(elist.toString());
+		
+		//toString사용하지말고 출력하기
+		for(Object e : elist) {
+			System.out.println(e);
+		}
+		for(int i=0; i<elist.size();i++) {
+			Object obj = elist.get(i);
+			//Object는 모든 타입의 부모타입이다
+			Emp e = (Emp)obj;
+			System.out.println(e.getEmpno() + " " + e.getEname() + " " + e.getJob());
+			
+		}
+		
+		//현업 개발자 ... (Object 타입)...항상 다운캐스팅 발생. 번거로움
+		//Object 쓰지 말자 ... 대안
+		//타입 강제(그 타입 쓰게 하자) 하나의 타입만을 가지고 데이터 관리
+		//제너릭(객체 생성시 타입 강제하는 방법)
+		
+		ArrayList<Emp> list2 = new ArrayList<Emp>();
+		list2.add(new Emp(1, "A", "IT"));
+		//이제 for문에서 다운캐스팅 필요없음...왜냐면 어차피 배열(객체)은 Emp타입이니까!
+		
+		for(Emp e: list2) {
+			System.out.println(e.getEmpno());
+		}
+	}
+}
+```
+
+## ArrayList를 이용한 뱅크 과제
+```java
+package kr.or.kosa;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+class Bank {
+	//Composition은 클래스 간에 포함(composite) 관계를 맺어주는 것,
+	//즉, 한 클래스의 멤버변수로 다른 클래스 타입의 참조 변수를 선언하는 것을 의미한다.
+	
+	private int totalAccount = 0;
+	List<Account> accounts = new ArrayList<Account>();
+	
+
+	void addAccount(String accountNo, String name) {
+		Account account = new Account(accountNo, name);
+		accounts.add(account);
+		totalAccount++;
+		return;
+	}
+	
+	Account getAccount(String accountNo) {  //getter
+		//accountNo를 파라미터로 받아서 해당 파라미터의 값을 가지는 계좌를 찾아 반환
+//		Account value = new Account(accountNo, accountNo); //파라미터를 이렇게 해야되나????
+		for(Account value1 : accounts) {
+			if(value1.getAccountNo().equals(accountNo))
+			{
+				return value1;
+			}
+		}
+		return null;
+	}
+	
+	List<Account> findAccounts(String name){ //이름의 계좌를 찾는 메소드
+		List<Account> nameList = new ArrayList();
+		for(Account value : accounts) {
+			if(value.getName().equals(name)) {
+				//같은 이름
+				nameList.add(value);
+			}
+		}
+		return nameList;
+		
+	}
+	
+	List<Account> getAccounts(){ // 전체계좌목록 반환
+		return accounts;
+		
+	}
+	
+	int getTotalAccount() {
+		//총 계좌 개수 리턴
+		return totalAccount;
+	}	
+}
+
+class Account{
+	Calendar today = Calendar.getInstance();
+	
+	private String accountNo;
+	private String name;
+	private long balance = 0;
+	
+	public Account(String accountNo, String name){
+		this.accountNo = accountNo;
+		this.name = name;
+	}
+	
+	List<Transaction> T = new ArrayList<Transaction>();
+	
+	void deposit(long amount) {
+		//입금
+		balance += amount;
+//		Transaction t = new Transaction(String.valueOf(today.get(Calendar.YEAR))+today.get(Calendar.MONTH)+today.get(Calendar.DATE), String.valueOf(today.get(Calendar.HOUR_OF_DAY))+today.get(Calendar.MINUTE), amount, balance);
+		Transaction t = new Transaction(String.valueOf(today.get(Calendar.YEAR))+"년"+today.get(Calendar.MONTH)+"월"+today.get(Calendar.DATE)+"일",String.valueOf(today.get(Calendar.HOUR_OF_DAY))+"시"+today.get(Calendar.MINUTE)+"분","입금", amount, balance);
+		T.add(t);
+	};
+	void withdraw(long amount) {
+		//출금
+		//Transaction(String transactionDate, String transactionTime, String kind, long amount, long balance)
+		balance = balance - amount;
+		Transaction t = new Transaction(String.valueOf(today.get(Calendar.YEAR))+"년"+today.get(Calendar.MONTH)+"월"+today.get(Calendar.DATE)+"일",String.valueOf(today.get(Calendar.HOUR_OF_DAY))+"시"+today.get(Calendar.MINUTE)+"분","출금", amount, balance);
+		T.add(t);
+	}
+	long getBalance() {
+		return balance;
+	}
+
+	List<Transaction> getTransactions(){
+		return T;
+	}
+	
+	//getter setter?
+	public String getAccountNo() {
+		return accountNo;
+	}
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
+	}
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String toString() {
+		return "[계좌번호" + accountNo + " 계좌주:" + name + " 잔고:" + balance + "]\n";
+	}
+
+	
+}
+
+class Transaction{
+	private String transactionDate;
+	private String transactionTime;
+	private String kind;
+	private long amount;
+	private long balance;
+	
+	public Transaction(String transactionDate, String transactionTime, String kind, long amount, long balance) {
+		this.transactionDate = transactionDate;
+		this.transactionTime = transactionTime;
+		this.kind = kind;
+		this.amount = amount;
+		this.balance = balance;
+	}
+
+	@Override
+	public String toString() {
+		return "거래일자:" + transactionDate + " 거래시간:" + transactionTime + ", "+ kind +" 거래금액:"
+				+ amount + " 현재잔액:" + balance + "\n";
+	}
+	
+	
+}
+
+public class myBank{
+	public static void main(String[] args) {
+		
+		Bank bank = new Bank();
+		bank.addAccount("1111", "kim");
+	    bank.addAccount("2222", "lee");
+	    bank.addAccount("3333", "park");
+	    bank.addAccount("4444", "hong");
+	    bank.addAccount("5555", "hong");
+	    bank.addAccount("6666", "kim");
+	    bank.addAccount("7777", "lee");
+	    System.out.print("총 계좌 개수 ");
+	    System.out.println(bank.getTotalAccount());
+	    
+	    System.out.print("\n3333이 계좌번호인 계좌 정보 ");
+	    System.out.println(bank.getAccount("3333"));
+	    System.out.println("\n***이름이 hong인 사람의 계좌 조회***");
+        List<Account> findAccount = bank.findAccounts("hong");
+        for(Account a : findAccount) {
+            System.out.println(a);
+        }
+		System.out.println("\n***전체 계좌 조회***");
+		System.out.println(bank.getAccounts().toString());
+//		
+		bank.getAccount("1111").deposit(2000);
+		bank.getAccount("1111").deposit(2000);
+		bank.getAccount("1111").deposit(2000);
+		bank.getAccount("1111").withdraw(1000);
 
 
+		Account kim = bank.getAccount("1111");
+		List<Transaction> kimTransaction = kim.getTransactions();
+	        for(int i = 0; i < kimTransaction.size(); i++) {
+	            System.out.println(kimTransaction.get(i));
+	        }
+	}
+}
+```
 
 
 
 
 
 ## 8월 18일부터 지금까지의 회고  
+>친구의 추천으로 갑작스럽게 해당 과정을 시작했다. 백엔드 지망이었던 적도 없고 늘 자바에 대해 막연한 두려움이 있었던지라 고민이 컸지만, 좋은 기회라는 것도 부정할 수 없어서 참여하였고 어느새 달이 바뀌었다. 자바를 다시 기초부터 빠르게 배우면서 역시 아직도 나는 자바를 잘 하지 못한다는 걸 느꼈다. 그러는 한 편 내가 자바에 대해 잘 몰랐던 점도 많단 걸 다시 한 번 느꼈다. 대학시절 주구장창 봤지만 여전히 어렵고 까다로운 언어를 다시 하나하나 되짚으며 자신감이 생기기도 겁이 나기도 했다. 하지만 대학시절 혼자 앉아 에러가 한가득 뜨는 화면만 멍하니 보던 것과, 지금 교육에서 조원들과 서로 돕고 이야기하며 하나의 코드를 만들어보는 것은 하늘과 땅 차이였다. 지금 내가 어느정도 막힘없이 코드를 짤 수 있는 것은 딱 대학 5년 동안 내가 배운 만큼이라고 생각한다. 프로그래밍은 처음 접하면 당연히 낯설고 어렵지만, 5년을 하면 누구나 나만큼은 하거나 나보다 훨씬 잘할 것이 당연하다. 그래서 나는 이 수업을 들으며 더 열심히 해야겠다고 느꼈다. 지금 내가 가진 것은 대학에 다니며 배운 5년 만큼의 여유고, 앞으로도 새로운 것을 배우며 계속 부딪힐 것이다. 자바를 끝내고 데이터베이스, 스프링, 프론트까지 배우게 될 것인데 그 과정에서 단 한 번도 포기하지 않고 지금만큼의 꾸준함을 유지하고 싶다.
