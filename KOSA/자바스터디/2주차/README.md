@@ -1,5 +1,4 @@
-
-![image](https://user-images.githubusercontent.com/51879052/188180575-9170c5aa-dcec-428e-afdd-9798ea8f396e.png)
+![image](https://user-images.githubusercontent.com/51879052/189489673-24cfb5fe-cf0f-49ab-bfa4-3aa5fc361fa6.png)
 
 Character 클래스를 상속받는 Mage, Warrior, Priest 클래스
 -----------------------
