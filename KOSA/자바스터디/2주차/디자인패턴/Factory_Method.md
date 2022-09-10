@@ -5,19 +5,22 @@
 ![image](https://user-images.githubusercontent.com/51879052/189471481-7d4c3af3-f80d-4562-8123-84d50c477dac.png)
 
 ## 피자를 주문하는 예제
-```java
-public abstract class PizzaStore {
-    public Pizza orderPizza(String type) {
-        Pizza pizza = createPizza(type);
+```
+preparing~~ NYStyleCheesePizza
+baking~~
+boxing~~
+preparing~~ NYStyleClamPizza
+baking~~
+boxing~~
+preparing~~ ChicagoStyleCheessePizza
+baking~~
+boxing~~
+preparing~~ ChicagoStyleClamPizza
+baking~~
+boxing~~
 
-        pizza.prepare();
-        pizza.bake();
-        pizza.box();
+Process finished with exit code 0
 
-        return pizza;
-    }
-
-    abstract Pizza createPizza(String type);
-}
 ```
 Creator 클래스인 PizzaStore. 이 클래스는 createPizza라는 팩토리 메소드를 실행해서 pizza를 생성한다.
+main메소드는 지점과 주어진 타입에 따라 다른 피자를 만든다
