@@ -5,6 +5,9 @@
 ![image](https://user-images.githubusercontent.com/51879052/189471481-7d4c3af3-f80d-4562-8123-84d50c477dac.png)
 
 ## 피자를 주문하는 예제
+![image](https://user-images.githubusercontent.com/51879052/189516140-9ece4824-1d63-46ee-a2cf-990b20c3161e.png)
+
+
 ```
 preparing~~ NYStyleCheesePizza
 baking~~
