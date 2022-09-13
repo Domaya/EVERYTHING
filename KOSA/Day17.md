@@ -11,7 +11,7 @@ List : ArrayList, Vector, linked List
 
 1. 타입을 처음부터 강제
 2. 타입 안정성(타입 강제)
-3. 강제 형변호나 필요 없다 : (Car)Object (필요없다)
+3. 강제 형변환 필요 없다 : (Car)Object (필요없다)
 
 제너릭 적용을 위해서는 설계도부터 적용.  
 
