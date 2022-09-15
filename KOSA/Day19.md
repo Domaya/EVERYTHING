@@ -307,3 +307,69 @@ public class Ex06_FileReader_FileWriter_Buffer {
 	}
 }
 ```
+# 파일 읽기 및 쓰기 실습과제 (로또추첨)
+``java
+package kr.or.kosa;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class Lotto {
+	Calendar cal = Calendar.getInstance();
+	SimpleDateFormat dateformat = new SimpleDateFormat("yyyy년MM월dd일 HH:mm");
+	Set<Integer> lotto = new TreeSet<Integer>();
+
+	public Lotto(){
+		for(int i=0;lotto.size()<6;i++) {
+			lotto.add((int)(Math.random()*45+1));
+		}
+	}
+	public void write(){
+		FileWriter fw = null;
+		BufferedWriter bw = null;
+		
+		try {
+			fw = new FileWriter("theLotto.txt", true);
+			bw = new BufferedWriter(fw);
+			bw.write("로또번호: " + lotto.toString() + "[" + dateformat.format(cal.getTime())+"]");
+			bw.newLine();
+			bw.flush();
+		} catch (IOException e) {
+			
+		}finally {
+			try {
+				fw.close();
+				bw.close();
+			} catch (Exception e2) {
+				
+			}
+		}
+	}
+	public void read() {
+		FileReader fr = null;
+		BufferedReader br = null;
+		try {
+			fr = new FileReader("theLotto.txt");
+			br = new BufferedReader(fr);
+			String line = "";
+			try {
+				for(int i=0; (line=br.readLine())!=null;i++) {
+					System.out.println(line);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			
+		}
+	}
+}
+```
