@@ -30,7 +30,7 @@ public class Ex11_Format_ETC {
 }
 ```
 
-# Stream
+# Stream 
 ```java
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
