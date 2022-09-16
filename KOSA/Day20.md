@@ -269,4 +269,232 @@ public class Ex14_DataInputStream {
 	}
 }
 ```
+# ObjectInputStream and ObjectOutputStream
+```
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
+import kr.or.kosa.UserInfo;
+
+public class Ex15_ObjectDataOutputStream {
+	public static void main(String[] args) {
+		//직렬화........
+		
+		String filename = "UserData.txt";
+		
+		FileOutputStream fos = null;
+		BufferedOutputStream bos = null;
+		//버퍼에 담아서 보내는 것을 뭐로 할거냐면
+		ObjectOutputStream out = null;
+		
+		try {
+			fos = new FileOutputStream(filename, true);
+			bos = new BufferedOutputStream(fos);
+			//직렬화
+			out = new ObjectOutputStream(bos); //얘가 버퍼에 있는 내용을 직렬화함
+			
+			UserInfo u1 = new UserInfo("홍길동", "super", 500); //완제품
+			UserInfo u2 = new UserInfo("scott", "tiger", 30); //완제품
+			//직렬화
+			out.writeObject(u1); //userinfo분해해서 한 줄로 세워서 파일에 기록
+			out.writeObject(u2);
+			//파일에 UserInfo 객체 두 개를 직렬화해서 write한 과정이 여기까지 ...
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("err" + e.getMessage());
+		}finally {
+			
+			try {
+				out.close();
+				bos.close();
+				fos.close();
+				System.out.println("파일 생성 -> 버퍼 -> 직렬화 -> 파일 write");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+	}
+}
+```
+```java
+import java.io.BufferedInputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import kr.or.kosa.UserInfo;
+
+//UserData.txt에 직렬화된 객체가 2개
+//이 객체들을 read원상태로 복원 즉 역직렬화
+public class Ex16_ObjectDataInputStream {
+	
+	public static void main(String[] args) {
+		String filename = "UserData.txt";
+		
+		FileInputStream fis = null;
+		BufferedInputStream bis = null;
+		ObjectInputStream in = null;
+		
+		try {
+			fis = new FileInputStream(filename);
+			bis = new BufferedInputStream(fis);
+			in = new ObjectInputStream(bis); //한 줄의 코드가 (역직렬화)
+			
+//			//복원
+//			UserInfo r1 = (UserInfo)in.readObject();
+//			UserInfo r2 = (UserInfo)in.readObject();
+//			System.out.println(r1.toString());
+//			System.out.println(r2.toString());
+			//근데 이러면 내가 몇 개의 객체가 있는지 알아야만 하니까...
+			
+			Object users = null;
+			while((users = in.readObject())!=null) {
+				System.out.println(((UserInfo)users).toString());
+			}
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("파일이 존재하지 않아요");
+		} catch (EOFException e2) {
+			System.out.println("끝 " + e2.getMessage());
+		} catch (IOException e3) {
+			System.out.println("파일을 읽을 수 없어요");
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스를 찾을 수 없어요 ");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				in.close();
+				bis.close();
+				fis.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				System.out.println(e2.getMessage());
+			}
+		}
+		
+	}
+}
+```
+
+
+
+# DOS과제
+```java
+import java.io.File;
+
+public class DosProject {
+	static File f;
+	
+	static public void mkdir(String dirName) {
+		String path = "";
+		path = f + "\\" + dirName;
+		File newfile = new File(path);
+		if(newfile.exists()) {
+			System.out.println("이미 존재하는 디렉토리입니다");
+		}else {
+			newfile.mkdir();
+		}
+	}
+	
+	static public void rename(String originName, String newName) {
+		try {
+			File originFileName = new File(f + "\\" + originName);
+			File newFileName = new File(f + "\\" + newName);
+			
+			if(!originFileName.exists()) {
+				System.out.println("존재하지 않습니다.");
+				System.exit(0);
+			}
+			if(newFileName.exists()) {
+				System.out.println("이미 존재하는 이름입니다");
+				System.exit(0);
+			}
+			
+			boolean scc = originFileName.renameTo(newFileName);
+			if(scc) {
+				System.out.println("수정 완료");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("rename 중 예외 발생 : " + e.getMessage());
+		}
+	}
+	static public void delete(File dirPath) {
+		try {
+			File[] files = dirPath.listFiles();
+			if(files != null) {
+				for(File file : files) {
+					delete(file);
+					System.out.println(file + "제거");
+				}
+			}
+			dirPath.delete();
+		} catch (Exception e) {
+			System.out.println("제거 실패..." + e.getMessage());
+		}
+	}
+	static public void dir() {
+		try {
+			File[] files = f.listFiles();
+			for(int i=0; i<files.length;i++) {
+				System.out.println(files[i].toString());
+			}
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void main(String[] args) throws Exception {
+
+		//java ExDos C:\Temp mkdir newDir
+
+		//java ExDos C:\Temp rename file.txt file2.txt
+
+		//java ExDos C:\Temp delete new.txt
+
+		if(args.length != 3 && args.length != 4 && args.length != 2) {
+
+		System.out.println("사용법 : [java파일명] [디렉토리경로] mkdir [생성디렉토리명]");
+		System.out.println("사용법 : [java파일명] [디렉토리경로] rename [파일명] [새로운 파일명]");
+		System.out.println("사용법 : [java파일명] [디렉토리경로] delete [파일명]");
+		System.out.println("사용법 : [java파일명] [디렉토리경로] dir");
+		System.exit(0);
+
+		}
+
+		f = new File(args[0]); //입력한 pathname 경로 파일의 객체를 생성합니다.
+
+		if(!f.exists() || !f.isDirectory()) { //존재하지 않거나 디렉토리 아니라면
+
+		System.out.println("유효하지 않은 디렉토리입니다");
+
+		System.exit(0);
+
+		}
+
+		if(args[1].equals("mkdir")) {
+			mkdir(args[2]);
+		}else if(args[1].equals("rename")) {
+			rename(args[2], args[3]);
+		}else if(args[1].equals("dir")) {
+			dir();
+		}else if(args[1].equals("delete")) {
+			String path = f + "\\" + args[2];
+			File newfile = new File(path);
+			delete(newfile);
+		}
+	}
+}
+```
