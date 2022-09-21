@@ -11,8 +11,11 @@ public void update(AccountData ac){
   어카운트 정보를 수정하기 전에 먼저 load()를 해주자 원하는 대로 작동하기 시작했다.
 
 # 클래스 다이어그램
-지금까지의 코드를 토대로 만든 클래스 다이어그램
+지금까지의 코드를 토대로 만든 클래스 다이어그램... 두렵다 ㅠ
 ![image](https://user-images.githubusercontent.com/51879052/191459031-cfd88823-67bf-43ec-8985-458b1233fe59.png)
+
+
+UML의 관계는 https://earthkingman.tistory.com/118 를 많이 참고했다.
 
 # adminSystem.java (계속 작성 중)
 ```package com.victoree2.system;
