@@ -228,6 +228,13 @@ from board; --POINT
 --Like(문자열 패턴 검색 연산자)
 --Like 연산자(와일드카드 문자 : %(모든 것), _(한문자) 결합 패턴...)
 --검색이 한정적 >> java 정규표현식을 오라클 적용
+SELECT last_name
+FROM emp
+WHERE REGEXP_LIKE (ename, '(*)n$');
+SELECT last_name
+FROM emp
+WHERE REGEXP_LIKE (ename, '^A(*)');
+
 
 select *
 from emp
