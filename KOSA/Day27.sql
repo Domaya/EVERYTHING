@@ -268,7 +268,8 @@ where ename like '_A%'; -WARD, MARTIN, JAMES
 --regexp_like연산자 ... 정규표현식을 쓸 수 있다
 select * from emp where regexp_like(ename, '[A-C]');
 select * from emp where regexp_like(ename, '^A');
-select * from emp where regexp_like(ename, '');
+select * from emp where regexp_like(ename, 'C');
+select regexp_substr(ename, 'a|e|i|o|u', 1, 1, 'i') from emp;
 
 --데이터 정렬하기
 --order by 컬럼명 : 문자, 숫자, 날짜 정렬
