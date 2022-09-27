@@ -551,3 +551,16 @@ select sal, to_char(sal, '$999,999') from emp;
 
 ----------------------------------------
 --HR계정으로 변경
+/*
+사원테이블(employees)에서 사원의 이름은 last_name , first_name 합쳐서 fullname 별칭 부여해서 출력하고
+입사일은  YYYY-MM-DD 형식으로 출력하고 연봉(급여 *12)을 구하고 연봉의 10%(연봉 * 1.1)인상한 값을
+출력하고 그 결과는 1000단위 콤마 처리해서 출력하세요
+단 2005년 이후 입사자들만 출력하세요 그리고 연봉이 높은 순으로  출력하세요
+*/
+
+SELECT first_name||' '||last_name as "fullname", to_char(hire_date, 'YYYY-MM-DD') as "입사일",
+salary*12 as "연봉", to_char(salary*12*1.1, '$999,999') as "인상연봉"
+FROM EMPLOYEES
+where to_char(hire_date,'YYYY')>='2005' --hire_date>'2005-01-01'
+order by 연봉 desc;
+--order by절은 select 다음에 실행 >> select된 결과 컬럼값을 사용가능(alias)
