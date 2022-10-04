@@ -20,3 +20,100 @@ java.sql 패키지
 4. executeUpdate() or executeQuery() : SQL문이 Insert,delete,update일 때...return int/ SELECT문일 때....return ResultSet
 5. ResultSet(SELECT의 경우) : 데이터베이스 조회 결과집합에 대한 표준. next()를 통해 DB의 table안의 row 한 줄을 불러온다. getString(), getInt()를 통해 한 행의 특정 Column값을 가져온다.
 6. close(Connection, Statement, ResultSet)
+
+
+preparedStatement를 이용한 실습 예제...
+try~catch를 사용시 가독성이 떨어질 것 같아 연습용으로
+모든 예외는 throws했음!!
+```java
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import kr.or.kosa.ConnectionHelper;
+/*
+sdept 테이블에 대해서
+전체조회
+조건조회
+삽입
+삭제
+수정
+을 작업 하시면 됩니다
+PreparedStatement
+ */
+public class HW01 {
+	public static void main(String[] args) throws SQLException {
+		Connection conn = null;
+		conn = ConnectionHelper.getConnection("oracle"); //DB 연결!
+		//System.out.println(conn.toString());
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; //select문을 위한...
+		String sql = null;
+		
+		
+		//전체조회
+		System.out.println("sdept 테이블 전체 조회");
+		sql = "select * from sdept";
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			int deptno = rs.getInt("deptno");
+			String dname = rs.getString("dname");
+			String loc = rs.getString("loc");
+			
+			System.out.println(deptno + "/" + dname + "/" + loc);
+		}
+		System.out.println("============================================");
+		//조건조회
+		//DNAME이 SALES인 경우를 조회한다
+		pstmt = null;
+		rs = null;
+		sql = "select * from sdept where dname = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, "SALES");
+		rs = pstmt.executeQuery();
+		System.out.println("조건 조회... dname = SALES인경우");
+		while(rs.next()) {
+			System.out.println(rs.getInt("deptno") + "/" + rs.getString("dname")+"/"+rs.getString("loc"));
+		}
+		System.out.println("============================================");
+		
+		//삽입
+		System.out.println("삽입 예제");
+		pstmt = null;
+		sql = "insert into sdept(deptno,dname,loc) values(?,?,?)";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, 50);
+		pstmt.setString(2,"IT");
+		pstmt.setString(3,"SEOUL");
+		pstmt.executeUpdate();
+		System.out.println("INSERT 성공");
+		
+		System.out.println("=============================================");
+		//삭제
+		System.out.println("삭제 예제");
+		pstmt = null;
+		sql = "delete from sdept where deptno = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, 60);
+		pstmt.executeUpdate();
+		System.out.println("DELETE 성공");
+		System.out.println("==============================================");
+		//수정
+		System.out.println("수정 예제");
+		pstmt = null;
+		sql = "update sdept set deptno=?, dname=?, loc=? where deptno=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, 80);
+		pstmt.setString(2, "mt.Hallah");
+		pstmt.setString(3, "JEJUDO");
+		pstmt.setInt(4, 70);
+		pstmt.executeUpdate();
+		System.out.println("UPDATE 성공");
+
+	}
+}
+```
