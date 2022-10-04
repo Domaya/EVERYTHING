@@ -6,12 +6,12 @@ Java Database Connectivity
 
 java.sql 패키지
 
--java.sqlDriver : DB와 연결하는 Driver class를 만들 때 반드시 implements해야 하는 interface로 JDBC 드라이버의 중심이 되는 itnerface입니다.
--java.sql.Connection : 특정 데이터베이스와 연결을 가지는 interface. DriverManager로부터 Connection 객체를 가져옵니다.
--java.sql.Statement : sql query문을 DB에 전송하는 방법을 정의한 interface입니다. Connection을 통해 가져옵니다.
--java.sql.ResultSet : SELECT구문 실행 결과를 조회할 수 있는 방법을 정의한 interface입니다.
--java.sql.PreparedStatement : Statement의 하위 인터페이스. SQL문을 미리 컴파일하여 실행속도를 높입니다.
--java.sql.CallableStatement : PreparedStatmene의 하위 인터페이스. DBMS의 Stored procedure를 호출합니다.
+-java.sqlDriver : DB와 연결하는 Driver class를 만들 때 반드시 implements해야 하는 interface로 JDBC 드라이버의 중심이 되는 itnerface입니다.  
+-java.sql.Connection : 특정 데이터베이스와 연결을 가지는 interface. DriverManager로부터 Connection 객체를 가져옵니다.  
+-java.sql.Statement : sql query문을 DB에 전송하는 방법을 정의한 interface입니다. Connection을 통해 가져옵니다.  
+-java.sql.ResultSet : SELECT구문 실행 결과를 조회할 수 있는 방법을 정의한 interface입니다.  
+-java.sql.PreparedStatement : Statement의 하위 인터페이스. SQL문을 미리 컴파일하여 실행속도를 높입니다.  
+-java.sql.CallableStatement : PreparedStatmene의 하위 인터페이스. DBMS의 Stored procedure를 호출합니다.  
 
 ## JDBC 개발 단계
 1. JDBC Driver loading : 데이터베이스 벤더에 맞는 드라이버를 호출. 디비 연결을 위해 드라이버 로딩
