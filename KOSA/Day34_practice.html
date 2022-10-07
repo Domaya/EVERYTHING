@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        #header{
+            background-color: white;
+            height: 60px;
+            align-items: center;
+            padding:3px;
+            color:black;
+            margin-bottom: 30px;
+        }
+        #main_left{
+            width:100%;
+            min-height: 750px;
+            height: 100%;
+            background-color: white;
+            color:black;
+            padding-left: 3px;
+            
+        }
+        #main_right{
+            border-left: solid black 1px;
+            min-width:970px;
+            padding-left: 15px;
+            padding-right: 15px;
+            min-height: 750px;
+            width:700px;
+            height:100%;
+            background-color: rgb(229, 229, 229);
+            margin-left: 3px;
+        }
+        
+        footer{
+            clear:both;
+            background-color: rgb(128, 157, 160);
+            font-size: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            align-items: center;
+            text-align: center;
+            color: white;
+            height: 70px;
+            border-width : 3px 0 0 0;
+            border-style : solid ;
+            border-color: #595959;
+            padding-top: 37px;
+            min-width:1190px;
+        }
+        .container{
+            border-top: solid black 2px;
+            
+            display: grid;
+            grid-template-columns: 1fr 7fr;
+        }
+        	/* CSS 주석
+			가상선택자 : 의미만 존재하는 자원들 :link, :vistited:, :hover, :active
+		*/
+		a:link {
+		  color: black;
+		}
+		
+		/* visited link */
+		a:visited {
+		  color: green;
+		}
+		
+		/* mouse over link */
+		a:hover {
+		  color: hotpink;
+		}
+		
+		/* selected link */
+		a:active {
+		  color: blue;
+		 }
+
+    </style>
+</head>
+<body>
+    <header id="header"><h1>HELLO</h1></header>
+    <div>
+        <div class="container">
+            <div class="item" id="main_left">
+                <nav>
+                    <ol>
+                        <li class="crumb"><a href="#" class="navtxt">재홍님</a></li>
+                        <li class="crumb"><a href="#" class="navtxt">찬수님</a></li>
+                        <li class="crumb"><a href="#" class="navtxt">지영님</a></li>
+                        <li class="crumb"><a href="#" class="navtxt">태우님</a></li>
+                        <li class="crumb"><a href="#" class="navtxt">나...ㅠ</a></li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="item" id="main_right">
+                <h2>4조의 도현정입니다</h2>
+                <p>우리태우잘하조...<br>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam iaculis ipsum est, eget pharetra massa rutrum eu. Nulla facilisi. Ut eget ex arcu. Praesent ultricies iaculis rutrum. Morbi purus eros, volutpat quis consectetur eu, tincidunt sed nulla. Nunc porta congue sem. Vivamus neque augue, ultrices quis tortor faucibus, accumsan suscipit turpis. Proin rutrum mattis erat id mollis. Proin sit amet arcu porttitor magna elementum placerat. Curabitur fringilla iaculis ligula. Proin mollis orci vel sagittis facilisis. Etiam turpis nisl, volutpat non luctus varius, euismod eu nisi. Aenean mauris turpis, varius quis facilisis dapibus, commodo ac leo.
+                    <br>
+                    Donec ultricies feugiat nulla eu ullamcorper. Proin sit amet lectus facilisis, molestie lorem id, euismod sem. Praesent a dignissim lectus, eu sodales diam. Morbi nec diam vel lectus pharetra efficitur ac sed augue. Maecenas consectetur purus a felis luctus, at commodo tellus hendrerit. Vivamus elementum molestie dolor id faucibus. Duis nunc nisi, tincidunt vel accumsan sit amet, consequat quis orci.
+                    <br>
+                    In ex nulla, commodo sit amet interdum vitae, pellentesque consectetur tortor. Morbi eget nibh et urna auctor tempus sodales et ipsum. Morbi tempus tempus orci, vel luctus lacus euismod at. Morbi quis odio vitae massa rutrum eleifend. Phasellus placerat condimentum velit, at tincidunt lorem faucibus ac. Quisque sit amet placerat urna. Etiam volutpat consequat enim, tristique convallis velit pulvinar sed. Donec vehicula hendrerit mauris, nec eleifend lacus mattis id. Mauris vel congue leo. Integer placerat mauris fermentum volutpat tristique. Proin sagittis sem pulvinar libero placerat aliquet consectetur quis arcu.
+                    <br>
+                    Curabitur quis urna suscipit, sollicitudin nulla eget, imperdiet neque. Vestibulum molestie dui lectus, blandit imperdiet dui dignissim lacinia. Nunc a ex maximus, bibendum neque vel, convallis urna. Vivamus ut nunc placerat, suscipit dui eu, elementum est. Aenean sollicitudin vel nibh in interdum. Nam fringilla lacus non tortor mollis elementum. Mauris sed libero id lacus venenatis ultrices. Nulla a lorem neque. Quisque at erat at ligula malesuada egestas sit amet at odio. Suspendisse scelerisque dolor sem. Phasellus egestas sollicitudin tincidunt. Phasellus at ipsum placerat, gravida urna a, ultrices erat. Etiam tempor augue tellus, vel dictum leo molestie id. Sed nec tincidunt tortor, in pellentesque leo.
+                    <br>
+                    Vivamus vel arcu non nulla tristique facilisis. Vivamus auctor odio nisi, at malesuada massa pellentesque consectetur. Suspendisse efficitur quam sit amet metus viverra, non euismod nisl facilisis. Donec laoreet ipsum id enim varius varius. Phasellus viverra ultrices ex, nec eleifend augue pulvinar vitae. Nam est libero, egestas at erat eget, imperdiet varius massa. Pellentesque ullamcorper interdum risus, id accumsan ex aliquet sit amet. Nulla et dolor justo. Proin sagittis ex a libero euismod, pretium pulvinar velit tempor. Aliquam tempor pretium felis, id hendrerit risus gravida et. Phasellus ultrices enim sed diam ultricies, sit amet sagittis enim dictum. Integer tincidunt diam sed eros dapibus, luctus vestibulum turpis vehicula. Proin gravida pretium turpis, id tincidunt nisi maximus in. Pellentesque fermentum urna nunc, non faucibus nisl congue quis. Vivamus tincidunt auctor felis et tincidunt. Aenean sed venenatis nisl, vitae aliquet dui.
+                </p>
+            </div>
+        </div>
+    </div>
+    <footer>From KOSA</footer>
+</body>
+</html>
