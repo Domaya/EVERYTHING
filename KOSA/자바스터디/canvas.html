@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jua">
+
+    <title>우리태우잘하조</title>
+    <style type="text/css">
+      
+      .navbar{
+        background-color:#EB6864 !important;
+        
+      }
+      .myview{
+        background-color: whitesmoke;
+        height:100vh;
+      }
+      body{
+        background-color: whitesmoke;
+      }
+      .container {
+        display: grid;
+        /* grid-template-columns: repeat(auto-fill, minmax(20%, auto)); */
+        /*
+        grid-column-start: 1;
+        grid-column-end: 5; */
+/*      
+        grid-row-start: 1;
+        grid-row-end: 2; */
+        grid-template-columns: repeat(3, 1fr);
+        /* column-gap: 10px; */
+        /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+        grid-template-rows: 150px 400px 400px;
+        row-gap: 10px;
+        /* grid-template-rows: 1fr 1fr 1fr */
+        /* grid-template-rows: repeat(3, 1fr) */
+        /* grid-template-rows: 200px 1fr */
+        /* grid-template-rows: 100px 200px auto; */
+        margin: 15px auto;
+        margin-bottom: 105px;
+      }
+      .item{
+        padding: 35px;
+      }
+      .item.first{
+        border-radius: 30px;
+        grid-column: 1 / span 3;
+        grid-row: minmax(100px, auto);
+        align-items: center;
+        text-align: center;
+        padding-top: 8px;
+        padding-bottom : 8px;
+        font-family: 'Jua';
+      }
+    </style>
+</head>
+<body>  
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <a class="navbar-brand" href="main.html"><h2>Team 4</h2></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="main.html">HOME</a>
+            <a class="nav-link" href="svg.html">SVG<span class="sr-only">(current)</span></a>
+            <a class="nav-link active" href="canvas.html">CANVAS</a>
+            <a class="nav-link" href="maps.html">MAPS</a>
+          </div>
+        </div>
+    </nav>
+
+
+
+    <div style="margin-top:14px; padding:10px">
+        <span>
+            <h3>What is HTML Canvas?</h3>
+            The HTML canvas element is used to draw graphics, on the fly, via JavaScript.
+            <br>
+            HTML 캔버스 요소는 자바스크립트를 통해 그래픽을 빠르게 그리는 데 사용된다.
+            <br>
+            The canvas element is only a container for graphics. You must use JavaScript to actually draw the graphics.
+            <br>
+            캔버스 요소는 그래픽을 위한 컨테이너일 뿐이고, 실제로 그래픽을 그리려면 자바스크립트를 사용해야 한다.
+            <br>
+            Canvas has several methods for drawing paths, boxes, circles, text, and adding images.
+            <br>
+            캔버스는 경로, 상자, 원, 텍스트 및 이미지 추가를 위한 여러가지 메소드를 갖는다.
+        </span>
+        <div style=" margin-top:13px; clear:both;">
+            <canvas id="mycanvas" width="200" height="200" style="border: 1px solid black;"></canvas>
+            <canvas id="myCanvas" width="200" height="100" style="border:1px solid #d3d3d3;">
+                Your browser does not support the HTML canvas tag.</canvas>
+                
+                <script>
+                var c = document.getElementById("myCanvas");
+                var ctx = c.getContext("2d");
+                //HTMLCanvasElement.getContext()메소드는 캔버스의 드로잉 컨텍스트를 반환한다.
+                //컨텍스트 식별자가 지원되지 않을 경우 null을 반환한다.
+                //contextType : 캔버스에 연관된 드로잉 컨텍스트를 정의하는 컨텍스트 식별자를 갖는 DOMString이다.
+                //가능한 값...2d:2차원 렌더링 컨텍스트. webgl : 3차원 렌더링 컨텍스트 etc...
+
+                //동일한 캔버스 엘리먼트에서 이 메소드를 호출하면 동일한 contextType인자와 함께
+                //메소드가 마지막으로 호출되었을 때 반환된 것과 같이 동일한
+                //드로잉 컨텍스트 인스턴스를 반환한다.
+                //다른 드로잉 컨텍스트 객체를 얻으려면 다른 contextType을 전달하거나
+                //다른 캔버스 엘리먼트에서 메소드를 호출해야 한다.
+                ctx.moveTo(0,0);
+                ctx.lineTo(200,100);
+                ctx.stroke();
+                </script>
+                <script>
+                    var c = document.getElementById("myCanvas");
+                    var ctx = c.getContext("2d");
+                    ctx.beginPath();
+                    ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+                    ctx.stroke();
+                    </script>
+
+                    
+            <canvas id="myCanvas2" width="200" height="100" style="border:1px solid #d3d3d3;">
+                Your browser does not support the HTML canvas tag.</canvas>
+                
+                <script>
+                var c = document.getElementById("myCanvas2");
+                var ctx = c.getContext("2d");
+                ctx.font = "30px Arial";
+                ctx.strokeText("Hello World",10,50);
+                </script>
+            
+            <canvas id="myCanvas3" width="200" height="100" style="border:1px solid #d3d3d3;">
+                Your browser does not support the HTML canvas tag.</canvas>
+                
+                <script>
+                var c = document.getElementById("myCanvas3");
+                var ctx = c.getContext("2d");
+                // Create gradient
+                var grd = ctx.createLinearGradient(0,0,200,0);
+                grd.addColorStop(0,"red");
+                grd.addColorStop(1,"white");
+                // Fill with gradient
+                ctx.fillStyle = grd;
+                ctx.fillRect(10,10,150,80);
+                </script>
+        </div>
+        <div style="margin-right:13px; float:left;">
+        <p>Image to use:</p>
+        <img id="scream" src="static/img_the_scream.jpg" alt="The Scream" width="220" height="277">
+        </div>            
+        <div style="float:left;">
+            <p>Canvas to fill:</p>
+            <canvas id="myCanvas4" width="250" height="300"
+            style="border:1px solid #d3d3d3;">
+            Your browser does not support the HTML canvas tag.</canvas>
+
+            <p><button onclick="myCanvas()">Try it</button></p>
+
+            <script>
+            function myCanvas() {
+            var c = document.getElementById("myCanvas4");
+            var ctx = c.getContext("2d");
+            var img = document.getElementById("scream");
+            ctx.drawImage(img,10,10);
+            }
+            </script>
+        </div>
+    </div>
+</body>
+</html>
